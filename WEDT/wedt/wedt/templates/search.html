@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{{ title }}</title>
+<link rel="stylesheet" type="text/css" href="/static/style.css" />
+<script type="text/javascript" src="/static/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="/static/utils.js"></script>
+</head>
+<body>
+Your question was: <i>{{ question }}</i><br />
+Answers:<br />
+<ul>
+{%for resp in response %}
+<li>{{ resp }}</li>
+{% endfor %}
+</ul>
+</form>
+
+</body>
+</html>

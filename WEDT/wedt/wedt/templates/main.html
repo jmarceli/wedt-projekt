@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{{ title }}</title>
+<link rel="stylesheet" type="text/css" href="/static/style.css" />
+<script type="text/javascript" src="/static/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="/static/utils.js"></script>
+<script type="text/javascript">
+	$(window).ready(resizeQuestionInput);
+	$(window).resize(resizeQuestionInput);
+</script>
+</head>
+<body>
+	<center>
+		<form action="search" method="post">
+			{% csrf_token %}
+			Enter your question:<br /> <input type="text" name="question" autofocus /><br />
+			<input type="submit" value="Submit" />
+		</form>
+	</center>
+</body>
+</html>
