@@ -7,17 +7,18 @@
 <script type="text/javascript" src="/static/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="/static/utils.js"></script>
 <script type="text/javascript">
-	$(window).ready(resizeQuestionInput);
+	$(window).ready(windowReady);
 	$(window).resize(resizeQuestionInput);
 </script>
 </head>
 <body>
 	<center>
-		<form action="search" method="post">
+		<form method="post" id="questionForm" onsubmit="return validateQuestion();" action="/search">
 			{% csrf_token %}
 			Enter your question:<br /> <input type="text" name="question" autofocus /><br />
 			<input type="submit" value="Submit" />
 		</form>
+		<div id="info"></div>
 	</center>
 </body>
 </html>
