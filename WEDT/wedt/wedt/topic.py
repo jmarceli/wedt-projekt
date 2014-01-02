@@ -103,7 +103,7 @@ class Topic(object):
                     
     def __len__(self):
         """Operator overload for getting number of posts with len(topic) syntax."""
-        return len(_posts)
+        return len(self._posts)
     
     def __getitem__(self, index):
         """Operator overload for accessing posts with topic[index] syntax."""
