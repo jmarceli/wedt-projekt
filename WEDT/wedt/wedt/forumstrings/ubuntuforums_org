@@ -1,0 +1,8 @@
+{
+	"pagination":"pagination",
+	"page":"page=",
+	"postlist":"postlist",
+	"username":"username",
+	"posttitle":"posttitle",
+	"postbody":"content"
+}
