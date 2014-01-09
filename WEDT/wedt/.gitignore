@@ -1,0 +1,4 @@
+# remove all .pyc files from repo
+*.pyc
+# remove build path from repo
+build/
