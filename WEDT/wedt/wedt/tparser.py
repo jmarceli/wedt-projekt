@@ -1,11 +1,12 @@
 import urllib
 from sets import Set
+from itertools import izip_longest
 from bs4 import BeautifulSoup
 from topic import Topic, Post
 import re
 import json
 
-def parse(address, site):
+def parse(address, site, learnmode=False):
 	pages = Set([address])
 	addr_site = re.findall('^.+/',address)[0]
 	addr_topic = re.findall('[^/]*$',address)[0]
@@ -18,26 +19,29 @@ def parse(address, site):
 		soup = BeautifulSoup(page)
 
 		# find links to other pages
-		for pagination in soup(True, attrs={"class": strings['pagination']}):
-			for link in pagination("a", href=re.compile(re.escape(addr_topic))):
-				t = re.search('[^/]*('+strings['page']+')[0-9]+', link['href'])
-				if t:
-					pages.add(addr_site+t.group(0))
+		if strings['pagination']: # for forums without pagination
+			for pagination in soup(True, attrs={"class": strings['pagination']}):
+				for link in pagination("a", href=re.compile(re.escape(addr_topic))):
+					t = re.search('[^/]*('+strings['page']+')[0-9]+', link['href'])
+					if t:
+						pages.add(addr_site+t.group(0))
 
-		# extract posts
-		postlist = soup.find("div", id=strings['postlist'])
+		# extract posts container if possible
+		postlist = (soup.find("div", id=strings['postlist']) if strings['postlist'] else soup)
 
 		author = []
 		title = []
 		text = []
-		for username in postlist(True, attrs={"class": strings['username']}):
-			author.append(username.string)
-		for posttitle in postlist(True, attrs={"class": strings['posttitle']}):
-			title.append(posttitle.string)
 		for postbody in postlist(True, attrs={"class": strings['postbody']}):
 			text.append('\n'.join(postbody.stripped_strings))
+		if strings['username']:
+			for username in postlist(True, attrs={"class": strings['username']}):
+				author.append(username.string)
+		if strings['posttitle']:
+			for posttitle in postlist(True, attrs={"class": strings['posttitle']}):
+				title.append(posttitle.string)
 
-		for (u,t,b) in zip(author, title, text):
+		for (u,t,b) in izip_longest(author, title, text, fillvalue=""):
 			topic.append(Post(u,t,b,''))
 
 		# go to the next page
