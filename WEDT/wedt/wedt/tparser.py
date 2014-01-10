@@ -13,6 +13,8 @@ def parse(address, site, learnmode=False):
 	with open("wedt/forumstrings/"+site, 'r') as f:
 		strings = json.loads(f.read())
 	topic = Topic()
+	scores = []
+	classes = []
 	p = 0
 	while p < len(pages):
 		page = get_page(sorted(pages)[p])
@@ -40,13 +42,17 @@ def parse(address, site, learnmode=False):
 		if strings['posttitle']:
 			for posttitle in postlist(True, attrs={"class": strings['posttitle']}):
 				title.append(posttitle.string)
+		if learnmode:		
+			for postscore in postlist(True, attrs={"class": strings['postscore']}):
+				scores.append(postscore.span.string)
+				classes.append(strings['postaccepted'] in postscore.get_text())
 
 		for (u,t,b) in izip_longest(author, title, text, fillvalue=""):
 			topic.append(Post(u,t,b,''))
 
 		# go to the next page
 		p=p+1
-	return topic
+	return (topic, scores, classes) if learnmode else topic
 
 def get_page(address):
 	file = urllib.urlopen(address)
