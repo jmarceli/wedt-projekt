@@ -1,0 +1,10 @@
+{
+	"pagination":"",
+	"page":"",
+	"postlist":"",
+	"username":"",
+	"posttitle":"",
+	"postbody":"post-text",
+	"postscore": "vote",
+	"postaccepted": "accepted"
+}
