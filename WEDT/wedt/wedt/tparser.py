@@ -38,14 +38,14 @@ def parse(address, site, learnmode=False):
 			text.append('\n'.join(postbody.stripped_strings))
 		if strings['username']:
 			for username in postlist(True, attrs={"class": strings['username']}):
-				author.append(username.string)
+				author.append(str(username.string))
 		if strings['posttitle']:
 			for posttitle in postlist(True, attrs={"class": strings['posttitle']}):
-				title.append(posttitle.string)
+				title.append(str(posttitle.string))
 		if learnmode:		
 			for postscore in postlist(True, attrs={"class": strings['postscore']}):
-				scores.append(postscore.span.string)
-				classes.append(strings['postaccepted'] in postscore.get_text())
+				scores.append(str(postscore.span.string))
+				classes.append("acc" if strings['postaccepted'] in postscore.get_text() else "nope")
 
 		for (u,t,b) in izip_longest(author, title, text, fillvalue=""):
 			topic.append(Post(u,t,b,''))
