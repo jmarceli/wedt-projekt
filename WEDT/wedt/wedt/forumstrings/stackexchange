@@ -3,7 +3,7 @@
 	"page":"",
 	"postlist":"",
 	"username":"",
-	"posttitle":"",
+	"posttitle":"question-hyperlink",
 	"postbody":"post-text",
 	"postscore": "vote",
 	"postaccepted": "accepted"
