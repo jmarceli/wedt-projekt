@@ -1,20 +1,6 @@
 class Post(object):
     """Representation of a single post in a topic."""
-    def __init__(self):
-        self._author=""
-        self._date=""
-        self._title=""
-        self._text=""
-        self._source=""
-        
-    def __init__(self, author, title, text):
-        self._author=author
-        self._date=""
-        self._title=title
-        self._text=text
-        self._source=""
-
-    def __init__(self, author, title, text, source):
+    def __init__(self, author, title, text, source="", date=""):
         self._author=author
         self._date=""
         self._title=title
