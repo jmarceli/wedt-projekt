@@ -29,6 +29,10 @@
     </div>
   </div>
   <div class="row">
+    <div class="small-12 columns" id="alert">
+    </div>
+  </div>
+  <div class="row">
     <div class="small-12 columns">
       <form method="post" id="questionForm" onsubmit="return validateQuestion();" action="/search">
         {% csrf_token %}
@@ -41,24 +45,16 @@
             <input type="text" name="question" autofocus placeholder="Enter URL..."/>
           </div>
           <div class="large-1 small-3 columns">
-            <input class="button postfix alert" type="submit" value="Submit" />
+            <input class="button postfix success" type="submit" value="Submit" />
           </div>
         </div>
       </form>
     </div>
   </div>
-  <div class="row">
-    <div class="small-12 columns">
-      <div id="info"></div>
-    </div>
-  </div>
+
   <!-- Don't slow down page loading by scripts, load them at the end -->
   <script type="text/javascript" src="/static/js/jquery.js"></script>
   <script type="text/javascript" src="/static/js/foundation.min.js"></script>
-  <script type="text/javascript">
-    $(document).foundation();
-    // add close button to dropdown
-    $('#howto-close').click(function() { $('body').trigger('click')});
-  </script>
+  <script type="text/javascript" src="/static/utils.js"></script>
 </body>
 </html>
