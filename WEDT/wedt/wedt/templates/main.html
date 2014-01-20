@@ -3,22 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <title>{{ title }}</title>
-<link rel="stylesheet" type="text/css" href="/static/style.css" />
-<script type="text/javascript" src="/static/jquery-2.0.3.min.js"></script>
-<script type="text/javascript" src="/static/utils.js"></script>
-<script type="text/javascript">
-	$(window).ready(windowReady);
-	$(window).resize(resizeQuestionInput);
-</script>
+<link rel="stylesheet" type="text/css" href="/static/css/foundation.css" />
+<script type="text/javascript" src="/static/js/modernizr.js"></script>
 </head>
 <body>
-	<center>
-		<form method="post" id="questionForm" onsubmit="return validateQuestion();" action="/search">
-			{% csrf_token %}
-			Enter your question:<br /> <input type="text" name="question" autofocus /><br />
-			<input type="submit" value="Submit" />
-		</form>
-		<div id="info"></div>
-	</center>
+  <div class="row">
+    <div class="small-12 columns">
+      <h1>Natural language search engine</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-12 columns">
+      <div class="panel">
+        <h4>Supported forums list:</h4>
+        <ul class="inline-list">
+          <li><a href="http://ubuntuforums.org">Ubuntuforums</a></li>
+          <li><a href="http://otherforum.org">Other forum</a></li>
+        </ul>
+        <a class="button" href="#" data-dropdown="howto">How to use</a>
+        <div id="howto" data-dropdown-content class="f-dropdown medium content">
+          <p>Copy forum thread url and paste it in the form below then click search button.</p>
+          <a id="howto-close" href="#">Close</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-12 columns">
+      <form method="post" id="questionForm" onsubmit="return validateQuestion();" action="/search">
+        {% csrf_token %}
+        <label>Enter thread URL:</label>
+        <div class="row collapse">
+          <div class="large-1 small-2 columns">
+            <span class="prefix">http://</span>
+          </div>
+          <div class="large-10 small-10 columns">
+            <input type="text" name="question" autofocus placeholder="Enter URL..."/>
+          </div>
+          <div class="large-1 small-3 columns">
+            <input class="button postfix alert" type="submit" value="Submit" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-12 columns">
+      <div id="info"></div>
+    </div>
+  </div>
+  <!-- Don't slow down page loading by scripts, load them at the end -->
+  <script type="text/javascript" src="/static/js/jquery.js"></script>
+  <script type="text/javascript" src="/static/js/foundation.min.js"></script>
+  <script type="text/javascript">
+    $(document).foundation();
+    // add close button to dropdown
+    $('#howto-close').click(function() { $('body').trigger('click')});
+  </script>
 </body>
 </html>
