@@ -56,9 +56,9 @@ def parse(address, learnmode=False):
 	return (topic, scores, classes) if learnmode else topic
 
 def get_site(address):
-	if re.match(r"(http://)?(www\.)?ubuntuforums(\.com|\.org)", address)
+	if re.match(r"(http://)?(www\.)?ubuntuforums(\.com|\.org)", address):
 		return "ubuntuforums"
-	if re.match(r"(http://)?(www\.)?stack[^\.]*(\.com|\.org)", address)
+	if re.match(r"(http://)?(www\.)?stack[^\.]*(\.com|\.org)", address):
 		return "stackexchange"
 	else:
 		return "default"
