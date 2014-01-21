@@ -17,7 +17,7 @@ def gather_topics(addresslist, site):
 		parsed = parse(address, True)
 		with open(os.path.join(train_path,site,re.findall('[^/]*$',address)[0]), 'w') as file:
 			pickle.dump(parsed, file)
-			
+
 def train_classifier(classifier, directory, feature, name=None):
 	"""Creates and trains a NLTK classifier from nltk.classify package.
 	
@@ -25,13 +25,20 @@ def train_classifier(classifier, directory, feature, name=None):
 	directory	- directory containing the training set (inside wedt/training)
 	feature		- feature set function (features.py)
 	"""
+	if classifier=="MaxEnt":
+		from nltk.classify.maxent import MaxentClassifier as Classifier
+	elif classifier=="PositiveNaiveBayes":
+		from nltk.classify.positivenaivebayes import PositiveNaiveBayesClassifier as Classifier
+	else:
+		from nltk.classify.naivebayes import NaiveBayesClassifier as Classifier
 	featuresets = []
 	for filename in os.listdir(os.path.join(train_path,directory)):
 		with open(os.path.join(train_path, directory, filename), 'r') as file:
 			topic, scores, classes = pickle.load(file)
 			featuresets.extend( nltk.classify.util.apply_features(feature, zip(((topic, t) for t in topic), classes)) )
-	c = classifier.train(featuresets)
+	c = Classifier.train(featuresets)
 	if name:
 		with open(os.path.join(classifier_path, name), 'w') as file:
 			pickle.dump((c,feature), file)
 	return c
+	
