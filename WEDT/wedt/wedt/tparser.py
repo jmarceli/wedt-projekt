@@ -56,13 +56,12 @@ def parse(address, learnmode=False):
 	return (topic, scores, classes) if learnmode else topic
 
 def get_site(address):
-	if "ubuntuforums" in address:
+	if re.match(r"(http://)?(www\.)?ubuntuforums(\.com|\.org)", address)
 		return "ubuntuforums"
-	if "stack" in address:
+	if re.match(r"(http://)?(www\.)?stack[^\.]*(\.com|\.org)", address)
 		return "stackexchange"
 	else:
 		return "default"
-	
 	
 def get_page(address):
 	file = urllib.urlopen(address)
