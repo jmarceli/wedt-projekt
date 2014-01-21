@@ -9,10 +9,12 @@ def main(argv):
 		if len(argv) < 4:
 			print_help()
 			return
-		for filename in argv[2:]:
-			with open(os.path.join(wedt.training.train_path,filename), 'r') as file:
+		for filename in argv[3:]:
+			if not os.path.exists(os.path.join(wedt.training.train_path,argv[2])):
+				os.makedirs(os.path.join(wedt.training.train_path,argv[2]))
+			with open(os.path.join('wedt','site_lists',filename), 'r') as file:
 				addresslist = file.read().splitlines()
-				wedt.training.gather_topics(addresslist, argv[1])
+				wedt.training.gather_topics(addresslist, argv[2])
 				
 	if argv[1] == "train":
 		if len(argv) < 6:

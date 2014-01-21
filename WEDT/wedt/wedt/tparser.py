@@ -39,13 +39,13 @@ def parse(address, learnmode=False):
 			text.append('\n'.join(postbody.stripped_strings))
 		if strings['username']:
 			for username in postlist(True, attrs={"class": strings['username']}):
-				author.append(str(username.string))
+				author.append(unicode(username.string))
 		if strings['posttitle']:
 			for posttitle in postlist(True, attrs={"class": strings['posttitle']}):
-				title.append(str(posttitle.string))
+				title.append(unicode(posttitle.string))
 		if learnmode:		
 			for postscore in postlist(True, attrs={"class": strings['postscore']}):
-				scores.append(str(postscore.span.string))
+				scores.append(unicode(postscore.span.string))
 				classes.append("acc" if strings['postaccepted'] in postscore.get_text() else "nope")
 
 		for (u,t,b) in izip_longest(author, title, text, fillvalue=""):
