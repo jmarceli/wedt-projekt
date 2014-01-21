@@ -6,10 +6,11 @@ from topic import Topic, Post
 import re
 import json
 
-def parse(address, site, learnmode=False):
+def parse(address, learnmode=False):
 	pages = Set([address])
 	addr_site = re.findall('^.+/',address)[0]
 	addr_topic = re.findall('[^/]*$',address)[0]
+	site = get_site(address)
 	with open("wedt/forumstrings/"+site, 'r') as f:
 		strings = json.loads(f.read())
 	topic = Topic()
@@ -54,6 +55,15 @@ def parse(address, site, learnmode=False):
 		p=p+1
 	return (topic, scores, classes) if learnmode else topic
 
+def get_site(address):
+	if "ubuntuforums" in address:
+		return "ubuntuforums"
+	if "stack" in address:
+		return "stackexchange"
+	else:
+		return "default"
+	
+	
 def get_page(address):
 	file = urllib.urlopen(address)
 	page = file.read()

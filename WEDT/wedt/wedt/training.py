@@ -11,10 +11,10 @@ def gather_topics(addresslist, site):
 	"""Downloads, parses and pickles all the topics from a list of addresses.
 	
 	addresslist	- a list of web addresses
-	site		- site name for parsing
+	site		- site name (for bundling topics)
 	"""
 	for address in addresslist:
-		parsed = parse(address, site, True)
+		parsed = parse(address, True)
 		with open(os.path.join(train_path,site,re.findall('[^/]*$',address)[0]), 'w') as file:
 			pickle.dump(parsed, file)
 			

@@ -29,7 +29,7 @@ def search(request):
                             'question': 'Please write the question URL first'})))
     questionURL = requestDict['question']
 
-    posts = tparser.parse(questionURL, 'ubuntuforums_org')
+    posts = tparser.parse(questionURL)
     #Do some NLP magic here...
     #vimpdb.set_trace()
     posts = nlpsort.magic(posts)
