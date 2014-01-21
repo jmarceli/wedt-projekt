@@ -22,7 +22,8 @@ def main(argv):
 			return
 		try:
 			feature = getattr(wedt.features, argv[4])
-			wedt.training.train_classifier(argv[3], argv[5], feature, argv[2])
+			threshold = argv[6] if len(argv) > 6 else None
+			wedt.training.train_classifier(argv[3], argv[5], feature, argv[2], threshold)
 		except AttributeError:
 			print "Wrong feature function name - see wedt/features.py"
 	
@@ -46,12 +47,14 @@ Usage:
 train.py gather directory [filenames...]
 	Gathers the topics listed in the files in the specified directory
 
-train.py train name type feature trainset
+train.py train name type feature trainset [threshold]
 	Trains a new classifier.
 	name		name for the new classifier
 	type		classifier type: MaxEnt, NaiveBayes or PositiveNaiveBayes
 	feature		featureset name (as in wedt/features.py)
 	trainset	name of the directory containing the training topics
+Optional argument:
+	threshold	normalized [0..1] value of score that qualifies an answer as accepted
 
 train.py check classifier address
 	Chooses an answer based on given classifier

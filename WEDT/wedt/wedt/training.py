@@ -18,7 +18,7 @@ def gather_topics(addresslist, site):
 		with open(os.path.join(train_path,site,re.findall('[^/]*$',address)[0]), 'w') as file:
 			pickle.dump(parsed, file)
 
-def train_classifier(classifier, directory, feature, name=None):
+def train_classifier(classifier, directory, feature, name=None, scorethreshold=None):
 	"""Creates and trains a NLTK classifier from nltk.classify package.
 	
 	classifier	- a classifier class that supports training
@@ -35,6 +35,9 @@ def train_classifier(classifier, directory, feature, name=None):
 	for filename in os.listdir(os.path.join(train_path,directory)):
 		with open(os.path.join(train_path, directory, filename), 'r') as file:
 			topic, scores, classes = pickle.load(file)
+			if scorethreshold:
+				scores = map(float,scores)
+				classes = ["acc" if s/max(scores) > scorethreshold else c for s,c in zip(scores,classes)]
 			featuresets.extend( nltk.classify.util.apply_features(feature, zip(((topic, t) for t in topic), classes)) )
 	c = Classifier.train(featuresets)
 	if name:
