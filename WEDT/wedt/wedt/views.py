@@ -19,7 +19,6 @@ def main(request):
 
 
 def search(request):
-    #vimpdb.set_trace()
     requestDict = request.POST
     template = loader.get_template('search.html')
 
@@ -27,17 +26,17 @@ def search(request):
         return HttpResponse(template.render(
             RequestContext(request,
                            {'title': 'No question',
-                            'question': 'Please write the question first'})))
-    question = requestDict['question']
+                            'question': 'Please write the question URL first'})))
+    questionURL = requestDict['question']
 
-    posts = tparser.parse('http://ubuntuforums.org/showthread.php?t=2198197',
-                          'ubuntuforums_org')
+    posts = tparser.parse(questionURL, 'ubuntuforums_org')
     #Do some NLP magic here...
+    #vimpdb.set_trace()
     posts = nlpsort.magic(posts)
     #response = ['good response', 'not so good response']
     #response = test.post(0)
 
     context = RequestContext(request,
                              {'title': 'Natural language search engine',
-                              'question': question, 'response': posts})
+                              'question': questionURL, 'response': posts})
     return HttpResponse(template.render(context))
