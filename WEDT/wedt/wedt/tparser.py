@@ -35,6 +35,7 @@ def parse(address, learnmode=False):
 		author = []
 		title = []
 		text = []
+		link = []
 		for postbody in postlist(True, attrs={"class": strings['postbody']}):
 			text.append('\n'.join(postbody.stripped_strings))
 		if strings['username']:
@@ -43,13 +44,16 @@ def parse(address, learnmode=False):
 		if strings['posttitle']:
 			for posttitle in postlist(True, attrs={"class": strings['posttitle']}):
 				title.append(unicode(posttitle.string))
+		if strings['postlink']:
+			for postlink in postlist('a', attrs={"class": strings['postlink']}):
+				link.append(addr_site+re.search('[^/]*$', postlink['href']).group(0))
 		if learnmode:		
 			for postscore in postlist(True, attrs={"class": strings['postscore']}):
 				scores.append(unicode(postscore.span.string))
 				classes.append("acc" if strings['postaccepted'] in postscore.get_text() else "nope")
 
-		for (u,t,b) in izip_longest(author, title, text, fillvalue=""):
-			topic.append(Post(u,t,b,''))
+		for (u,t,b,l) in izip_longest(author, title, text, link, fillvalue=""):
+			topic.append(Post(u,t,b,l))
 
 		# go to the next page
 		p=p+1

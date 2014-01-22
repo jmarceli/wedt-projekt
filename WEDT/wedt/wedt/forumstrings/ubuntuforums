@@ -4,5 +4,6 @@
 	"postlist":"postlist",
 	"username":"username",
 	"posttitle":"posttitle",
-	"postbody":"content"
+	"postbody":"content",
+	"postlink":"postcounter"
 }

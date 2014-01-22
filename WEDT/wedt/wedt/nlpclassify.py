@@ -1,4 +1,5 @@
-import os, pickle, nltk, re
+import os
+import pickle
 
 classifier_path = os.path.join("wedt","classifiers")
 

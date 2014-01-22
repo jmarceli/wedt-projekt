@@ -1,10 +1,11 @@
 class Post(object):
     """Representation of a single post in a topic."""
-    def __init__(self, author, title, text, source="", date=""):
+    def __init__(self, author, title, text, link="", source="", date=""):
         self._author=author
         self._date=""
         self._title=title
         self._text=text
+        self._link=link
         self._source=source
 
     @property
@@ -51,6 +52,11 @@ class Post(object):
     @text.setter
     def text(self, value):
         self._text = value
+		
+    @property
+    def link(self):
+        """Direct link to the post"""
+        return self._link
         
     def __repr__(self):
         """String representation (for debugging)."""
