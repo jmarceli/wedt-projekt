@@ -11,7 +11,7 @@ def choose_answers(classifier_name, topic):
 	
 def choose_answer(classifier_name, topic):
 	"""Chooses the answer with the highest probability of being acceptable
-	Only works for classifiers with prob_classify() method, such as MaxEnt"""
+	Only works for classifiers with prob_classify() method"""
 	classifier,features = load_classifier(classifier_name)
 	distributions = classifier.batch_prob_classify(map(features, ((topic, t) for t in topic[1:])))
 	probs = [dist.prob('acc') for dist in distributions]
