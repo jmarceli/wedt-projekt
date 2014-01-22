@@ -22,7 +22,7 @@ def parse(address, learnmode=False):
 		soup = BeautifulSoup(page)
 
 		# find links to other pages
-		if strings['pagination']: # for forums without pagination
+		if strings.get('pagination',''): # for forums without pagination
 			for pagination in soup(True, attrs={"class": strings['pagination']}):
 				for link in pagination("a", href=re.compile(re.escape(addr_topic))):
 					t = re.search('[^/]*('+strings['page']+')[0-9]+', link['href'])
@@ -38,13 +38,13 @@ def parse(address, learnmode=False):
 		link = []
 		for postbody in postlist(True, attrs={"class": strings['postbody']}):
 			text.append('\n'.join(postbody.stripped_strings))
-		if strings['username']:
+		if strings.get('username',''):
 			for username in postlist(True, attrs={"class": strings['username']}):
 				author.append(unicode(username.string))
-		if strings['posttitle']:
+		if strings.get('posttitle',""):
 			for posttitle in postlist(True, attrs={"class": strings['posttitle']}):
 				title.append(unicode(posttitle.string))
-		if strings['postlink']:
+		if strings.get('postlink',""):
 			for postlink in postlist('a', attrs={"class": strings['postlink']}):
 				link.append(addr_site+re.search('[^/]*$', postlink['href']).group(0))
 		if learnmode:		

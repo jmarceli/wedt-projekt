@@ -27,7 +27,7 @@ def main(argv):
 		except AttributeError:
 			print "Wrong feature function name - see wedt/features.py"
 	
-	elif argv[1] == "check":
+	elif argv[1] == "classify":
 		if len(argv) < 4:
 			print_help()
 			return
@@ -36,7 +36,18 @@ def main(argv):
 		answers = choose_answers(argv[2], parse(argv[3]))
 		for answer in answers:
 			print answer
+			
+	elif argv[1] == "best":
+		if len(argv) < 4:
+			print_help()
+			return
+		from wedt.tparser import parse
+		from wedt.nlpclassify import choose_answer
+		answer = choose_answer(argv[2], parse(argv[3]))
+		print answer
+		
 	else:
+		print "Unknown command."
 		print_help()
 		
 		
@@ -56,8 +67,13 @@ train.py train name type feature trainset [threshold]
 Optional argument:
 	threshold	normalized [0..1] value of score that qualifies an answer as accepted
 
-train.py check classifier address
-	Chooses an answer based on given classifier
+train.py classify classifier address
+	Chooses best answers based on given classifier
+	classifier	classifier name
+	address		topic address
+	
+train.py best classifier address
+	Chooses the best answer with given probability-based classifier
 	classifier	classifier name
 	address		topic address
 """
