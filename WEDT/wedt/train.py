@@ -1,10 +1,13 @@
 import os
 import sys
+import time
+
+show_time = True
 
 def main(argv):
 	import wedt.training
 	import wedt.features
-
+	start_time = time.time()
 	if argv[1] == "gather":
 		if len(argv) < 4:
 			print_help()
@@ -50,6 +53,8 @@ def main(argv):
 		print "Unknown command."
 		print_help()
 		
+	end_time = time.time()
+	if show_time: print "\nTime elapsed: " + str(end_time - start_time)
 		
 def print_help():
 	print """Training module of wedt-projekt.
