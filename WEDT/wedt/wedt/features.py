@@ -10,6 +10,16 @@ def featureset_sample(posts):
 	features.update(keywords_from_op(posts))
 	return features
 	
+def featureset2(posts):
+	features = {}
+	features.update(longer_than_op(posts))
+	features.update(author_mentioned(posts))
+	features.update(author_thanked(posts))
+	features.update(keywords_from_op(posts))
+	features.update(written_by_op(posts))
+	return features
+
+	
 def features_simple(posts):
 	features = {}
 	features.update(longer_than_op(posts))
