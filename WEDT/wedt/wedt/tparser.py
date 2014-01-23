@@ -30,7 +30,7 @@ def parse(address, learnmode=False):
 						pages.add(addr_site+t.group(0))
 
 		# extract posts container if possible
-		postlist = (soup.find("div", id=strings['postlist']) if strings['postlist'] else soup)
+		postlist = (soup.find("div", id=strings['postlist']) if strings.get('postlist','') else soup)
 
 		author = []
 		title = []
@@ -41,6 +41,9 @@ def parse(address, learnmode=False):
 		if strings.get('username',''):
 			for username in postlist(True, attrs={"class": strings['username']}):
 				author.append(unicode(username.string))
+		if strings.get('optitle',""):
+			optitle = postlist.find(True, id=strings['optitle'])
+			title.append(unicode(optitle.string))
 		if strings.get('posttitle',""):
 			for posttitle in postlist(True, attrs={"class": strings['posttitle']}):
 				title.append(unicode(posttitle.string))

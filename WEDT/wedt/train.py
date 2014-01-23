@@ -48,6 +48,7 @@ def main(argv):
 		from wedt.nlpclassify import choose_answer
 		answer = choose_answer(argv[2], parse(argv[3]))
 		print answer
+		print answer.link
 		
 	elif argv[1] == "check":
 		if len(argv) < 4:

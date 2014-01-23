@@ -1,9 +1,7 @@
 {
-	"pagination":"",
-	"page":"",
-	"postlist":"",
+	"optitle":"page-subtitle",
 	"username":"username",
-	"posttitle":"",
+	"posttitle":"permalink",
 	"postbody":"field-items",
 	"postlink":"permalink"
 }
