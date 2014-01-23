@@ -35,9 +35,11 @@ def parse(address, learnmode=False):
 		author = []
 		title = []
 		text = []
+		source = []
 		link = []
 		for postbody in postlist(True, attrs={"class": strings['postbody']}):
 			text.append('\n'.join(postbody.stripped_strings))
+			source.append(''.join(map(unicode,postbody.contents)))
 		if strings.get('username',''):
 			for username in postlist(True, attrs={"class": strings['username']}):
 				author.append(unicode(username.string))
@@ -58,8 +60,8 @@ def parse(address, learnmode=False):
 		if len(text)-len(link)==1: #OP isn't permalinked
 			link = [address] + link
 
-		for (u,t,b,l) in izip_longest(author, title, text, link, fillvalue=""):
-			topic.append(Post(u,t,b,l))
+		for (u,t,b,l,s) in izip_longest(author, title, text, link, source, fillvalue=""):
+			topic.append(Post(u,t,b,l,s))
 
 		# go to the next page
 		p=p+1
