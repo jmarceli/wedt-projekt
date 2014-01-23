@@ -47,9 +47,12 @@ def author_mentioned((topic, post)):
 def author_thanked((topic, post)):
 	features = {"author-thanked":False}
 	for p in topic:
-		if re.search("[Tt]hanks? (you)? "+post.author, p.text):
+		if re.search("[Tt][Hh](x|anks?),? (you)? "+re.escape(post.author), p.text):
 			features["author-thanked"] = True
 	return features
+	
+def written_by_op((topic, post)):
+	return {"written-by-op":post.author==topic.op.author}
 
 def keywords_from_op((topic, post)):
 	features = {}
