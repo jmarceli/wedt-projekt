@@ -5,7 +5,9 @@ Created on 01-12-2013
 '''
 from django.http import HttpResponse
 from django.template import RequestContext, loader
-#import vimpdb
+from wedt.tparser import parse
+from wedt.nlpclassify import choose_answers
+#import pdb
 import urllib
 import tparser
 import nlpsort
@@ -26,17 +28,21 @@ def search(request):
         return HttpResponse(template.render(
             RequestContext(request,
                            {'title': 'No question',
-                            'question': 'Please write the question URL first'})))
+                            'question': 'Please write the question URL first'
+                            })))
     questionURL = requestDict['question']
 
-    posts = tparser.parse(questionURL)
+    parsed = tparser.parse(questionURL)
+    posts = choose_answers('bay-word-mix', parsed)
+    #pdb.set_trace()
+
     #Do some NLP magic here...
     #vimpdb.set_trace()
-    posts = nlpsort.magic(posts)
+    #posts = nlpsort.magic(posts)
     #response = ['good response', 'not so good response']
     #response = test.post(0)
 
     context = RequestContext(request,
                              {'title': 'Natural language search engine',
-                              'question': questionURL, 'response': posts})
+                              'question': questionURL, 'response': posts.pop(0), 'others': posts})
     return HttpResponse(template.render(context))

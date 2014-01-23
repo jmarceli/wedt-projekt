@@ -23,18 +23,26 @@
   <div class="row">
     <div class="small-12 columns">
       <div class="panel callout">
-        <h4>Top answer is:</h4>
-        {%for resp in response %}
-        <p>{{ resp }}</p>
-        {% endfor %}
+        <h4>The top answer is:</h4>
+        <p>{{ response }}</p>
       </div>
-    </div>
-  </div>
+		</div>
+	</div>
   <div class="row">
     <div class="small-12 columns">
-      <a href="/" class="button alert">Go back to search</a>
+      <a href="/" class="button alert right">Go back to search</a>
     </div>
   </div>
+ <div class="row">
+    <div class="small-12 columns">
+			<h3>Other classified answers were:</h3>
+			{% for resp in others %}
+        <p>{{ resp }}</p>
+				<hr />
+			{% endfor %}
+    </div>
+  </div>
+
 
   <!-- Don't slow down page loading by scripts, load them at the end -->
   <script type="text/javascript" src="/static/js/jquery.js"></script>
