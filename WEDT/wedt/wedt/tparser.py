@@ -62,6 +62,8 @@ def parse(address, learnmode=False):
 def get_site(address):
 	if re.match(r"(http://)?(www\.)?ubuntuforums(\.com|\.org)", address):
 		return "ubuntuforums"
+	if re.match(r"(https?://)?(www\.)?drupal\.org", address):
+		return "drupal"
 	if re.match(r"(http://)?(www\.)?([^/]*.)?stack[^\.]*(\.com|\.org)", address):
 		return "stackexchange"
 	if re.match(r"(http://)?(www\.)?askubuntu\.com", address):
