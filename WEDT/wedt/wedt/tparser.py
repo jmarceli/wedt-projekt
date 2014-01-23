@@ -51,6 +51,9 @@ def parse(address, learnmode=False):
 			for postscore in postlist(True, attrs={"class": strings['postscore']}):
 				scores.append(unicode(postscore.span.string))
 				classes.append("acc" if strings['postaccepted'] in postscore.get_text() else "nope")
+		
+		if len(text)-len(link)==1: #OP isn't permalinked
+			link = [address] + link
 
 		for (u,t,b,l) in izip_longest(author, title, text, link, fillvalue=""):
 			topic.append(Post(u,t,b,l))

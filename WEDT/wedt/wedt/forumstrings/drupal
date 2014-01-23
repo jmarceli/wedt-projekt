@@ -4,5 +4,6 @@
 	"postlist":"",
 	"username":"username",
 	"posttitle":"",
-	"postbody":"field-items"
+	"postbody":"field-items",
+	"postlink":"permalink"
 }
