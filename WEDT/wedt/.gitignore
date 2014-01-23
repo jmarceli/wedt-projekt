@@ -4,4 +4,3 @@
 build/
 # ignore pickle dump folders
 training
-classifiers
