@@ -31,6 +31,14 @@ def train_classifier(classifier, directory, feature, name=None, scorethreshold=N
 		from nltk.classify.positivenaivebayes import PositiveNaiveBayesClassifier as Classifier
 	else:
 		from nltk.classify.naivebayes import NaiveBayesClassifier as Classifier
+	featuresets = get_featuresets(directory, feature, scorethreshold)
+	c = Classifier.train(featuresets)
+	if name:
+		with open(os.path.join(classifier_path, name), 'w') as file:
+			pickle.dump((c,feature), file)
+	return c
+
+def get_featuresets(directory, feature, scorethreshold):
 	featuresets = []
 	for filename in os.listdir(os.path.join(train_path,directory)):
 		with open(os.path.join(train_path, directory, filename), 'r') as file:
@@ -39,9 +47,4 @@ def train_classifier(classifier, directory, feature, name=None, scorethreshold=N
 				scores = map(float,scores)
 				classes = ["acc" if s/max(scores) > scorethreshold else c for s,c in zip(scores,classes)]
 			featuresets.extend( nltk.classify.util.apply_features(feature, zip(((topic, t) for t in topic), classes)) )
-	c = Classifier.train(featuresets)
-	if name:
-		with open(os.path.join(classifier_path, name), 'w') as file:
-			pickle.dump((c,feature), file)
-	return c
-	
+	return featuresets

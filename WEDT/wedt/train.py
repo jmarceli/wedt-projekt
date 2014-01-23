@@ -49,6 +49,13 @@ def main(argv):
 		answer = choose_answer(argv[2], parse(argv[3]))
 		print answer
 		
+	elif argv[1] == "check":
+		if len(argv) < 4:
+			print_help()
+			return
+		from wedt.nlpclassify import check_classifier
+		print "Accuracy: " + str(check_classifier(argv[2], argv[3]))
+		
 	else:
 		print "Unknown command."
 		print_help()
@@ -72,6 +79,8 @@ train.py train name type feature trainset [threshold]
 Optional argument:
 	threshold	normalized [0..1] value of score that qualifies an answer as accepted
 
+train.py check classifier trainset
+	
 train.py classify classifier address
 	Chooses best answers based on given classifier
 	classifier	classifier name

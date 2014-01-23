@@ -1,5 +1,6 @@
 import os
 import pickle
+from nltk.classify import accuracy
 
 classifier_path = os.path.join("wedt","classifiers")
 
@@ -22,3 +23,10 @@ def load_classifier(name):
 	with open(os.path.join(classifier_path, name), 'r') as file:
 		classifier, features = pickle.load(file)
 	return classifier, features
+	
+def check_classifier(classifier_name, directory, scorethreshold=None):
+	from nltk.classify import accuracy
+	from training import get_featuresets
+	classifier, features = load_classifier(classifier_name)
+	featuresets = get_featuresets(directory, features, scorethreshold)
+	return accuracy(classifier, featuresets)
