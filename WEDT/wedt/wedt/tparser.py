@@ -42,7 +42,10 @@ def parse(address, learnmode=False):
 			source.append(''.join(map(unicode,postbody.contents)))
 		if strings.get('username',''):
 			for username in postlist(True, attrs={"class": strings['username']}):
-				author.append(unicode(username.strings[0]))
+				if username.string:
+					author.append(unicode(username.string))
+				else:
+					author.append(unicode(username.a.string))
 		if strings.get('optitle',""):
 			optitle = postlist.find(True, id=strings['optitle'])
 			title.append(unicode(optitle.string))
