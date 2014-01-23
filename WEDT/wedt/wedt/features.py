@@ -57,7 +57,7 @@ def author_mentioned((topic, post)):
 def author_thanked((topic, post)):
 	features = {"author-thanked":False}
 	for p in topic:
-		if re.search("[Tt][Hh](x|anks?),? (you)? "+re.escape(post.author), p.text):
+		if re.search("[Tt][Hh]([Xx]|anks?),?( you)? "+re.escape(post.author), p.text):
 			features["author-thanked"] = True
 	return features
 	
