@@ -55,5 +55,6 @@ def search(request):
                              {'title': 'Natural language search engine',
                               'question': questionURL,
                               'response': bestpost,
-                              'others': posts})
+                              'others': posts,
+                              'link': bestpost.link})
     return HttpResponse(template.render(context))
