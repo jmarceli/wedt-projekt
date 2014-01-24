@@ -33,8 +33,16 @@ def search(request):
     questionURL = requestDict['question']
 
     parsed = tparser.parse(questionURL)
-    posts = choose_answers('bay-sam-mix', parsed)
-    bestpost = choose_answer('bay-sam-mix', parsed)
+
+    if 'drupal' in questionURL:
+        posts = choose_answers('bay-sam-drupal', parsed)
+        bestpost = choose_answer('bay-sam-drupal', parsed)
+    elif 'ubuntu' in questionURL:
+        posts = choose_answers('bay-sam-ubu', parsed)
+        bestpost = choose_answer('bay-sam-ubu', parsed)
+    else:
+        posts = choose_answers('bay-sam-mix', parsed)
+        bestpost = choose_answer('bay-sam-mix', parsed)
     #pdb.set_trace()
 
     #Do some NLP magic here...
@@ -45,5 +53,7 @@ def search(request):
 
     context = RequestContext(request,
                              {'title': 'Natural language search engine',
-                              'question': questionURL, 'response': bestpost, 'others': posts})
+                              'question': questionURL,
+                              'response': bestpost,
+                              'others': posts})
     return HttpResponse(template.render(context))

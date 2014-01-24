@@ -7,6 +7,9 @@
 <script type="text/javascript" src="/static/js/modernizr.js"></script>
 </head>
 <body>
+	<div id="myModal" class="reveal-modal" data-reveal>
+		<h2>Please wait, while we are looking for answer ...</h2>
+	</div>
   <div class="row">
     <div class="small-12 columns">
       <h1>Natural language search engine</h1>
@@ -19,6 +22,7 @@
         <ul class="inline-list">
           <li><a href="http://ubuntuforums.org">Ubuntuforums</a></li>
           <li><a href="https://drupal.org/forum">Drupal CMS forum</a></li>
+          <li>Others</li>
         </ul>
         <a class="button" href="#" data-dropdown="howto">How to use</a>
         <div id="howto" data-dropdown-content class="f-dropdown medium content">
@@ -45,7 +49,7 @@
             <input type="text" name="question" autofocus placeholder="Enter URL..."/>
           </div>
           <div class="large-1 small-3 columns">
-            <input class="button postfix success" type="submit" value="Search" />
+            <input class="button postfix success" type="submit" value="Search"/>
           </div>
         </div>
       </form>

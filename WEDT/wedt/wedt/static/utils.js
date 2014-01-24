@@ -11,6 +11,7 @@ function validateQuestion() {
   var question = $("#questionForm").find('input[name="question"]').val();
 
 	if (regexp.test(question)) {
+		$('#myModal').foundation('reveal', 'open');
 		return true;
   }
   else {
