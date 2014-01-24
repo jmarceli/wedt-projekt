@@ -24,7 +24,9 @@
     <div class="small-12 columns">
       <div class="panel callout clearfix">
         <h4>The top answer is:</h4>
-        <p>{{ response }}</p>
+				<h2>{{ response.title }}</h2>
+				<h6>author: <i>{{ response.author }}</i></h6>
+				<p>{{ response.text }}</p>
 				<p class="right"><a href="{{ link }}">Show original post</a></p>
       </div>
 		</div>
@@ -39,7 +41,9 @@
     <div class="small-12 columns">
 			<h3>Other classified answers were:</h3>
 			{% for resp in others %}
-        <p>{{ resp }}</p>
+				<h2>{{ resp.title }}</h2>
+				<h6>author: <i>{{ resp.author }}</i></h6>
+				<p>{{ resp.text }}</p>
 				<hr />
 			{% endfor %}
     </div>
