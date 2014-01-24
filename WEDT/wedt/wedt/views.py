@@ -35,8 +35,8 @@ def search(request):
     parsed = tparser.parse(questionURL)
 
     if 'drupal' in questionURL:
-        posts = choose_answers('ent-sam-drupal', parsed)
-        bestpost = choose_answer('ent-sam-drupal', parsed)
+        posts = choose_answers('ent-sam-dru', parsed)
+        bestpost = choose_answer('ent-sam-dru', parsed)
     elif 'ubuntu' in questionURL:
         posts = choose_answers('ent-sam-ubu', parsed)
         bestpost = choose_answer('ent-sam-ubu', parsed)
