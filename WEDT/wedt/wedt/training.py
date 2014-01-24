@@ -45,7 +45,6 @@ def get_featuresets(directory, feature, scorethreshold):
 			topic, scores, classes = pickle.load(file)
 			if scorethreshold:
 				scores = map(float,scores)
-				scores[0] = 0 # ignore OP score
 				classes = ["acc" if s/max(scores) > scorethreshold else c for s,c in zip(scores,classes)]
 			featuresets.extend( nltk.classify.util.apply_features(feature, zip(((topic, t) for t in topic), classes)) )
 	return featuresets
