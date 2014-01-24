@@ -2,7 +2,7 @@ import os
 import sys
 import time
 
-show_time = True
+show_time = False
 
 def main(argv):
 	import wedt.training
@@ -56,6 +56,28 @@ def main(argv):
 			return
 		from wedt.nlpclassify import check_classifier
 		print "Accuracy: " + str(check_classifier(argv[2], argv[3]))
+		
+	elif argv[1] == "fullcheck":
+		if len(argv) < 4:
+			print_help()
+			return
+		from wedt.report import Report
+		report = Report.generate(argv[2], argv[3])
+		i=0
+		
+		print "Classifier: {0}".format(argv[2])
+		
+		for best_hit, c_accuracy, c_recall in zip(report.best_hits, report.c_accuracy, report.c_recall):
+			i = i + 1
+			print "\nTopic {0}:".format(i)
+			print "Classification accuracy: {0}".format(c_accuracy)
+			print "Properly accepted: {0}".format(c_recall)
+			print "Best answer correct: {0}".format(best_hit)
+			
+		print "\nOverall statistics:"
+		print "Classification accuracy: {0}".format(report.total_accuracy)
+		print "Classification recall: {0}".format(report.total_recall)
+		print "Best answer accuracy: {0}".format(report.best_accuracy)
 		
 	else:
 		print "Unknown command."
