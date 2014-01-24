@@ -35,14 +35,14 @@ def search(request):
     parsed = tparser.parse(questionURL)
 
     if 'drupal' in questionURL:
-        posts = choose_answers('bay-sam-drupal', parsed)
-        bestpost = choose_answer('bay-sam-drupal', parsed)
+        posts = choose_answers('ent-sam-drupal', parsed)
+        bestpost = choose_answer('ent-sam-drupal', parsed)
     elif 'ubuntu' in questionURL:
-        posts = choose_answers('bay-sam-ubu', parsed)
-        bestpost = choose_answer('bay-sam-ubu', parsed)
+        posts = choose_answers('ent-sam-ubu', parsed)
+        bestpost = choose_answer('ent-sam-ubu', parsed)
     else:
-        posts = choose_answers('bay-sam-mix', parsed)
-        bestpost = choose_answer('bay-sam-mix', parsed)
+        posts = choose_answers('ent-sam-mix', parsed)
+        bestpost = choose_answer('ent-sam-mix', parsed)
     #pdb.set_trace()
 
     #Do some NLP magic here...
