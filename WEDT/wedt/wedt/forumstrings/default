@@ -1,9 +1,8 @@
 {
-	"pagination":"",
-	"page":"",
+	"pagination":"pagination",
+	"page":"&start=",
 	"postlist":"",
-	"username":"",
+	"username":"postprofile",
 	"posttitle":"",
-	"postbody":"",
-	"postlink":""
+	"postbody":"content"
 }
