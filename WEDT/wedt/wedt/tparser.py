@@ -38,8 +38,10 @@ def parse(address, learnmode=False):
 		source = []
 		link = []
 		for postbody in postlist(True, attrs={"class": strings['postbody']}):
-			text.append('\n'.join(postbody.stripped_strings))
-			source.append(''.join(map(unicode,postbody.contents)))
+			txt = '\n'.join(postbody.stripped_strings)
+			if txt:
+				text.append(txt)
+				source.append(''.join(map(unicode,postbody.contents)))
 		if strings.get('username',''):
 			for username in postlist(True, attrs={"class": strings['username']}):
 				author.append(unicode(username.string))
