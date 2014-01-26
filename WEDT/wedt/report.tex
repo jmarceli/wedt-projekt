@@ -18,6 +18,13 @@ na dole tabeli widoczne są sumaryczne statystyki.
 Niestety wyniki przedstawione w tabelach różnią się od tych opisywanych w raporcie ze względu
 na inny zbiór testowy pytań i odpowiedzi zawierający 25, a nie 30 przykładów.
 
+Kolumna "dokładność" przedstawia ogólną dokładność klasyfikacji (dla pojedynczego tematu oraz dla całego zbioru), tj. odsetek odpowiedzi zaklasyfikowanych zgodnie z klasyfikacją zadaną w zbiorze testowym. W kolumnie "poprawna" znajduje się odsetek prawidłowo zaklasyfikowanych odpowiedzi \emph{poprawnych}. Kolumna "najlepsza" przedstawia natomiast zbieżność wyboru najlepszej odpowiedzi z odpowiedzią oznaczoną jako poprawną. Średnia wartość tej ostatniej oznacza rzeczywistą skuteczność wyboru właściwej odpowiedzi przez aplikację.
+
+Można zauważyć, że odpowiedzi poprawne bardzo często nie są jako takie klasyfikowane (niskie wartości w kolumnie "poprawna"). Wynika to z tego, że klasyfikatory probabilistyczne przyjmują wstępne prawdopodobieństwo dla każdej klasy proporcjonalne do częstości jej występowania w zbiorze trenującym; jako, że na każdy temat przypada tylko jedna odpowiedź oznaczona jako poprawna (tj. wybrana przez zakładającego temat), a odpowiedzi niepoprawnych może być dowolnie dużo, wstępne prawdopodobieństwo dla klasy "niepoprawne" jest dużo wyższe, niż dla klasy "poprawne". Potocznie można powiedzieć, że klasyfikatory są "wybredne". Mimo to wybór najlepszej odpowiedzi jako posiadającej najwyższe prawdopodobieństwo klasyfikacji jako poprawnej, niezależnie od tego, czy została tak zaklasyfikowana, pozwala na wykorzystanie takiego "wybrednego" klasyfikatora, co potwierdza stosunkowo wysoka (w stosunku do dokładności samej klasyfikacji) skuteczność tej metody widoczna w niniejszych testach.
+
+Przeprowadzenie dokładniejszych testów wykazało też, że wbrew początkowym spostrzeżeniom dokonanym na podstawie samej dokładności klasyfikacji, wykorzystanie słownika w zestawie cech wpływa korzystnie na wybór poprawnej odpowiedzi, zmniejszając tym samym "wybredność" klasyfikatora. Jego wykorzystanie jest jednak uzasadnione jedynie w połączeniu z klasyfikatorem bayesowskim.
+
+\section{Wyniki testów}
 
 \begin{tabular}{|l|c|c|c|}
 \hline
