@@ -41,7 +41,7 @@ class Report:
 		
 		for t_class, t_answer, c_class, c_answer in zip(self.train_classes, self.train_answers, self.classes, self.answers):
 			correct = [t==c for t,c in zip(t_class, c_class) ]
-			accepted = [t=='acc' and c in zip(c_class, correct)]
+			accepted = [t=='acc' and c for t,c in zip(c_class, correct)]
 			self.c_hits.append(sum(correct))
 			self.c_recall.append(sum(accepted))
 			self.c_accuracy.append(float(sum(correct))/len(correct))
